@@ -13,9 +13,11 @@ export class SoldiersCreator extends Creator<ISoldier[]> {
 
     this.item.forEach((soldiers: ISoldier) => {
       const soldier = new Soldier(soldiers.health, soldiers.recharge);
-      // const error = validateSync(soldier)
+      // const error = validateSync(soldier, {
+      //   groups: ["soldier"]
+      // });
       // if (error.length > 0) {
-      //     throw new Error(error.toString())
+      //   throw new Error(error.toString());
       // }
 
       result.push(soldier);

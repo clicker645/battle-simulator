@@ -4,7 +4,7 @@ import { IStrategy } from "./rules/strategy";
 import { Length } from "class-validator";
 
 export class Army implements IArmy {
-  name: string;
+  readonly name: string;
 
   @Length(2)
   squads: ISquad[];

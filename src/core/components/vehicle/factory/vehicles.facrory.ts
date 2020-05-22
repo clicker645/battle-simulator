@@ -21,9 +21,11 @@ export class VehicleCreator extends Creator<IVehicle[]> {
         operators,
         vehicle.recharge
       );
-      // const error = validateSync(newVehicle)
+      // const error = validateSync(newVehicle, {
+      //   groups: ["vehicle"],
+      // });
       // if (error.length > 0) {
-      //     throw new Error(error.toString())
+      //   throw new Error(error.toString());
       // }
 
       result.push(newVehicle);

@@ -4,7 +4,7 @@ import { IsIn, Length } from "class-validator";
 
 export class Squad implements ISquad {
   @IsIn(["soldier", "vehicle"])
-  type: string;
+  readonly type: string;
 
   @Length(5, 10)
   units: IUnit[];

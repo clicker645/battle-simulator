@@ -3,9 +3,17 @@ import { ISoldier } from "../soldier/rules/soldier";
 import { Unit } from "../unit/unit";
 import { Length } from "class-validator";
 
-const DamageWeightForVehicle = 0.6;
-const DamageWeightForRandomSolder = 0.2;
-const DamageWeightForAnotherSolders = 0.1;
+enum DamageType {
+  VEHICLES,
+  DEFAULT,
+}
+
+declare type selectDamage = (damage: number) => number;
+
+const damagePerUnit: { [key in DamageType]: selectDamage } = {
+  [DamageType.VEHICLES]: (damage: number) => damage * 0.6,
+  [DamageType.DEFAULT]: (damage: number) => damage * 0.1,
+};
 
 export class Vehicle extends Unit implements IVehicle {
   @Length(1, 3)
@@ -47,21 +55,20 @@ export class Vehicle extends Unit implements IVehicle {
   }
 
   takeDamage(damage: number) {
-    this.health -= damage * DamageWeightForVehicle;
+    this.health -= damagePerUnit[DamageType.VEHICLES](damage);
 
-    const minIndex = Math.ceil(0),
-      maxIndex = Math.floor(this.operators.length),
-      randomIndex =
-        Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
+    const randomIndex = Math.floor(Math.random() * this.operators.length);
 
-    for (let i = 0; i < this.operators.length; i++) {
-      if (i === randomIndex) {
-        this.operators[i].takeDamage(damage * DamageWeightForRandomSolder);
-        continue;
+    this.operators.forEach((operator, index) => {
+      /**
+       * Random operator getting double damage
+       */
+      if (index === randomIndex) {
+        operator.takeDamage(damagePerUnit[DamageType.DEFAULT](damage));
       }
 
-      this.operators[i].takeDamage(damage * DamageWeightForAnotherSolders);
-    }
+      operator.takeDamage(damagePerUnit[DamageType.DEFAULT](damage));
+    });
   }
 
   alive(): boolean {

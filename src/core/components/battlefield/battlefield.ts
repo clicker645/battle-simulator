@@ -1,6 +1,5 @@
 import { IArmy } from "../army/rules/army";
 import { IStrategy } from "../army/rules/strategy";
-import { Length } from "class-validator";
 
 export class Battlefield {
   public armies: IArmy[];

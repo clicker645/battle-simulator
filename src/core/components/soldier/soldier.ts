@@ -4,7 +4,7 @@ import { Unit } from "../unit/unit";
 const MaxExperience = 50;
 
 export class Soldier extends Unit implements ISoldier {
-  experience: number = 0;
+  private experience: number = 0;
 
   constructor(health: number, recharge: number) {
     super(health, recharge);

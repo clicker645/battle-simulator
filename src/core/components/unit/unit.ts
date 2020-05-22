@@ -4,19 +4,15 @@ import { Min, Max } from "class-validator";
 export abstract class Unit implements IUnit {
   @Min(0)
   @Max(100)
-  health: number;
+  public health: number;
 
   @Min(100, { groups: ["soldier"] })
   @Min(1000, { groups: ["vehicle"] })
   @Max(2000)
-  recharge: number;
+  public readonly recharge: number;
 
-  rechargeEnd: number;
+  private rechargeEnd: number;
 
-  /**
-   * @param health
-   * @param recharge
-   */
   protected constructor(health: number, recharge: number) {
     this.health = health;
     this.recharge = recharge;
