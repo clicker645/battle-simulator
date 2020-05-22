@@ -11,6 +11,7 @@ function getSoldiers(experienceOfOperators: number = 0): Soldier[] {
   for (let i = 0; i < 5; i++) {
     let operator = new Soldier(100, 50);
 
+    // @ts-ignore
     operator.experience = experienceOfOperators;
     soldiers.push(operator);
   }
@@ -23,6 +24,7 @@ function getVehicle(experienceOfOperators: number = 0): Vehicle {
   for (let i = 0; i < 5; i++) {
     let operator = new Soldier(100, 50);
 
+    // @ts-ignore
     operator.experience = experienceOfOperators;
     operators.push(operator);
   }

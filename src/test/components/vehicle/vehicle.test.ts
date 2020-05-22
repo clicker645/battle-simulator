@@ -7,6 +7,7 @@ function getVehicle(experienceOfOperators: number = 0): Vehicle {
   for (let i = 0; i < 5; i++) {
     let operator = new Soldier(100, 50);
 
+    // @ts-ignore
     operator.experience = experienceOfOperators;
     operators.push(operator);
   }
@@ -14,7 +15,7 @@ function getVehicle(experienceOfOperators: number = 0): Vehicle {
   return new Vehicle(100, operators, 1000);
 }
 
-describe("Test attackProbability", () => {
+describe("Function attackProbability()", () => {
   test("operators without experience", () => {
     const numberForIteration = 100;
 
@@ -37,7 +38,7 @@ describe("Test attackProbability", () => {
   });
 });
 
-describe("Test attackDamage", () => {
+describe("Function attackDamage()", () => {
   test("operators without experience", () => {
     let vehicle = getVehicle();
     expect(vehicle.attackDamage()).toBe(0.1);
@@ -69,7 +70,7 @@ test("Test default case fot takeDamage", () => {
   expect(operatorWithMinHealth.health).toBe(80);
 });
 
-describe("Test alive", () => {
+describe("Function alive()", () => {
   test("vehicle and operators alive", () => {
     let vehicle = getVehicle();
     expect(vehicle.alive()).toBeTruthy();
